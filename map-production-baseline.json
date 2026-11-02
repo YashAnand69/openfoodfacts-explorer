@@ -1,0 +1,30 @@
+{
+  "requests": [
+    {
+      "url": "http://127.0.0.1:5187/marker-icon.png",
+      "status": 404
+    },
+    {
+      "url": "http://127.0.0.1:5187/marker-shadow.png",
+      "status": 404
+    }
+  ],
+  "errors": [],
+  "imgs": [
+    {
+      "tag": "IMG",
+      "src": "http://127.0.0.1:5187/marker-shadow.png",
+      "complete": true,
+      "naturalWidth": 0,
+      "width": 41
+    },
+    {
+      "tag": "IMG",
+      "src": "http://127.0.0.1:5187/marker-icon.png",
+      "complete": true,
+      "naturalWidth": 0,
+      "width": 25
+    }
+  ],
+  "text": "Non-production environment\n\nData and features on this site may change or be reset without notice.\n\nGo\nLogin\nDiscover\nContribute\nProducers\nPrices\nExplore by\nKnowledge panel manufacturing place — real API payload 3248340054063\n+\n−\n Leaflet | © OpenStreetMap\nStay Updated\nNewsletter\nForum\nContribute\nProducers Platform\nTranslators\nHunger Games\nGitHub\nData, API, SDKs\nWiki\nDiscover our Project\nWho we are\nBlog\nCode of Conduct\nVision, Mission, Values and Programs\nPartners\nFAQ\nPress\nOpen X Facts\n\nTry the temporary landing pages for each Open X Facts project.\n\nOpen Food Facts\nOpen Beauty Facts\nOpen Pet Food Facts\nOpen Products Facts\nA collaborative, free and open database of food products\nfrom around t"
+}

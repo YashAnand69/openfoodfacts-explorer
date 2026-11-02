@@ -1,0 +1,67 @@
+diff --git a/src/lib/knowledgepanels/Map.svelte b/src/lib/knowledgepanels/Map.svelte
+index bf91226..d800fb2 100644
+--- a/src/lib/knowledgepanels/Map.svelte
++++ b/src/lib/knowledgepanels/Map.svelte
+@@ -2,7 +2,10 @@
+ 	import type { KnowledgeMapElement } from '#lib/api.js';
+ 	import { onMount } from 'svelte';
+ 
+-	import type { Map, Marker } from 'leaflet';
++	import type { Icon, Map, Marker } from 'leaflet';
++	import markerIcon2xUrl from 'leaflet/dist/images/marker-icon-2x.png?url';
++	import markerIconUrl from 'leaflet/dist/images/marker-icon.png?url';
++	import markerShadowUrl from 'leaflet/dist/images/marker-shadow.png?url';
+ 
+ 	let { element }: { element: KnowledgeMapElement } = $props();
+ 
+@@ -14,6 +17,7 @@
+ 	let mapContainer: HTMLElement;
+ 	let mapInstance: Map | null;
+ 	let markers: Marker[] = [];
++	let markerIcon: Icon | null = null;
+ 	let L: typeof import('leaflet') | null = null;
+ 
+ 	// Initialize map on mount
+@@ -28,6 +32,16 @@
+ 
+ 			try {
+ 				if (mounted) {
++					markerIcon = L.icon({
++						iconRetinaUrl: markerIcon2xUrl,
++						iconUrl: markerIconUrl,
++						shadowUrl: markerShadowUrl,
++						iconSize: [25, 41],
++						iconAnchor: [12, 41],
++						popupAnchor: [1, -34],
++						tooltipAnchor: [16, -28],
++						shadowSize: [41, 41]
++					});
+ 					// Initialize map
+ 					mapInstance = L.map(mapContainer, {});
+ 					L.tileLayer(TILES_BASE_URL, { maxZoom: MAX_ZOOM, attribution: ATTRIBUTION }).addTo(
+@@ -58,7 +72,7 @@
+ 	});
+ 
+ 	function updateMap() {
+-		if (!mapInstance || !L) return;
++		if (!mapInstance || !L || !markerIcon) return;
+ 
+ 		// Clear existing markers
+ 		cleanupMarkers();
+@@ -85,7 +99,7 @@
+ 		// Add markers for valid pointers
+ 		for (const pointer of validPointers) {
+ 			try {
+-				const marker = L.marker([pointer.geo.lat, pointer.geo.lng]);
++				const marker = L.marker([pointer.geo.lat, pointer.geo.lng], { icon: markerIcon });
+ 				marker.addTo(mapInstance);
+ 				markers.push(marker);
+ 			} catch (error) {
+@@ -109,6 +123,7 @@
+ 			mapInstance.remove();
+ 			mapInstance = null;
+ 		}
++		markerIcon = null;
+ 	}
+ </script>
+ 
